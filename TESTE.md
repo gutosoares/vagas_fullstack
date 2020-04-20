@@ -1,5 +1,3 @@
-Augusto Soares
-
 ## Objetivo
 
 Parabéns, você passou para a segunda fase do processo seletivo da [Vigia de Preço](http://vigiadepreco.com.br/) para desenvolvedor FullStack.
