@@ -1,0 +1,53 @@
+/* display: $value */ 
+.d {
+  &-flex {
+    display: flex !important;
+  }
+}
+/* .flex-direction: $value */ 
+.flex-direction {
+  &-column {
+    flex-direction: column;
+  }
+  &-row {
+    flex-direction: row;
+  }
+}
+/* justify-content-{$position} */
+.justify-content {
+  $justify-positions: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    around: space-around,
+    between: space-between,
+    evenly: space-evenly
+  );
+  @mixin justify-align($prop,$arr) {
+    @each $mod, $dir in $arr {
+      &-#{$mod} {
+        #{$prop}: #{$dir} !important;
+      }
+    }
+  }
+  @include justify-align('justify-content', $justify-positions);
+}
+
+/* align-items-{$position} */
+.align-items {
+  $align-positions: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    stretch: stretch,
+    baseline: baseline
+  );
+  @mixin align-items($prop,$arr) {
+    @each $mod, $dir in $arr {
+      &-#{$mod} {
+        #{$prop}: #{$dir} !important;
+      }
+    }
+  }
+  @include align-items('align-items', $align-positions);
+}
