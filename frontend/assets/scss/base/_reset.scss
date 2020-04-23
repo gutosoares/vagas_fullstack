@@ -1,0 +1,23 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  outline: none !important;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  margin: 0;
+  line-height: 1;
+  font-family: 'Open Sans', sans-serif;
+}
+ol, ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  &:visited {
+    color: #222;
+  }
+}
