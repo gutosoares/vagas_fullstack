@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="container">
-      <Navbar />
+      <Navbar @show="show" />
       <div class="row">
         <div class="grid-lg-6 d-flex justify-content-center flex-direction-column">
           <h1>Título da página</h1>
@@ -30,6 +30,11 @@ export default {
   name: 'Header',
   components: {
     Navbar
+  },
+  methods: {
+    show (type) {
+      this.$emit('show', type)
+    }
   }
 }
 </script>
