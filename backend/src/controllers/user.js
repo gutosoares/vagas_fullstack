@@ -2,7 +2,7 @@ const User = require('../models/user')
 const md5 = require('md5')
 const authService = require('../services/auth')
 
-async function getUser (request, response) {
+async function getUser(request, response) {
   try {
     const users = await User.find({}, { name: 1, email: 1 })
 
@@ -21,7 +21,7 @@ async function getUser (request, response) {
   }
 }
 
-async function getUserById (request, response) {
+async function getUserById(request, response) {
   const { id } = request.params
 
   try {
@@ -42,7 +42,7 @@ async function getUserById (request, response) {
   }
 }
 
-async function createUser (request, response) {
+async function createUser(request, response) {
   const { name, email, password } = request.body
 
   try {
