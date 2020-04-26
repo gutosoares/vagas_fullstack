@@ -41,12 +41,11 @@ async function getProducts(request, response) {
 }
 
 async function createProduct(request, response) {
-  const { storeid, percentage, title, price, image, link } = request.body
+  const { store, percentage, title, price, image, link } = request.body
 
-  console.log({ storeid, percentage, title, price, image, link })
   try {
     const res = await Product.create({
-      storeid,
+      store,
       percentage,
       title,
       price,
@@ -54,13 +53,11 @@ async function createProduct(request, response) {
       link
     })
 
-    console.log(res)
     return response.status(201).json({
       message: 'Produto cadastrado com sucesso',
       data: res._id
     })
   } catch (error) {
-    console.log(error)
     return response.status(400).json({
       message: 'Erro ao cadastrar produto'
     })
@@ -69,12 +66,12 @@ async function createProduct(request, response) {
 
 async function editProduct(request, response) {
   const { id } = request.params
-  const { storeid, percentage, title, price, image, link } = request.body
+  const { store, percentage, title, price, image, link } = request.body
 
   try {
     await Product.updateOne(
       { _id: id },
-      { $set: { storeid, percentage, title, price, image, link } },
+      { $set: { store, percentage, title, price, image, link } },
     )
 
     return response.status(200).json({

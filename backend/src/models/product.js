@@ -4,7 +4,8 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 const productSchema = new mongoose.Schema({
   store: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Store'
+    ref: 'Store',
+    required: [true, 'O id do loja é obrigatório']
   },
   percentage: {
     type: Number,
