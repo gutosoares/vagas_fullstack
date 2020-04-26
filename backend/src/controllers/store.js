@@ -1,8 +1,26 @@
 const Store = require('../models/store')
 
 async function getStores(request, response) {
+  const { page = 1, sortBy = 'updated', search = '', limit = 10, descending = false } = request.query
+
+  const query = {}
+
+  if(search !== '') {
+    query['name'] = search
+  }
+
+  const options = {
+    select: 'name logo link',
+    page,
+    limit: limit > 30 ? 30 : parseInt(limit),
+    sort: {
+      name: descending === 'true' ? 'desc' : 'asc',
+      'updated_At': sortBy === 'updated' ? 1 : -1
+    }
+  }
+
   try {
-    const stores = await Store.find({}, { name: 1, logo: 1, link: 1 })
+    const stores = await Store.paginate(query, options)
     if(!stores) return response.status(400).json({
       message: 'Lojas não encontradas'
     })

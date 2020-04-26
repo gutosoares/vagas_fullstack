@@ -1,8 +1,31 @@
 const Product = require('../models/product')
 
 async function getProducts(request, response) {
+  const { page = 1, sortBy = 'updated', search = '', limit = 10, descending = false } = request.query
+
+  const query = {}
+
+  if(search !== '') {
+    query['name'] = search
+  }
+
+  const options = {
+    select: 'percentage title price image link store',
+    page,
+    limit: limit > 30 ? 30 : parseInt(limit),
+    sort: {
+      name: descending === 'true' ? 'desc' : 'asc',
+      'updated_At': sortBy === 'updated' ? 1 : -1
+    },
+    populate: {
+      path: 'store',
+      select: '_id name logo link image',
+      model: 'Store'
+    }
+  }
+
   try {
-    const products = await Product.find({})
+    const products = await Product.paginate(query, options)
     if(!products) return response.status(400).json({
       message: 'Produtos não encontrados'
     })

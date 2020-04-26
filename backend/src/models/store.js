@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const storeSchema = new mongoose.Schema({
   name: {
@@ -20,5 +21,7 @@ const storeSchema = new mongoose.Schema({
     updatedAt: 'updated_at'
   }
 })
+
+storeSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Store', storeSchema)

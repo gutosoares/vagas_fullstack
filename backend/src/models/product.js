@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const productSchema = new mongoose.Schema({
-  storeid: {
+  store: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Store'
   },
@@ -34,5 +35,7 @@ const productSchema = new mongoose.Schema({
     updatedAt: 'updated_at'
   }
 })
+
+productSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Product', productSchema)
