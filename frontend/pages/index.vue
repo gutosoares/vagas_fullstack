@@ -38,12 +38,7 @@ export default {
     type: ''
   }),
   methods: {
-    async fetchMostPopularProducts () {
-      // const data = await getProductsWithStores(this.$axios, this.pagination)
-      // this.products = [...this.products, ...data]
-    },
     showModal (type) {
-      console.log({ type })
       this.type = type
       this.modal = true
     },

@@ -7,13 +7,14 @@
           Ver todos
         </nuxt-link>
       </div>
-      <SlideProducts :items="products" @next="nextSwiper" />
+      <SlideProducts :products="products" :paginate-info="paginate" @next="nextSwiper" />
     </div>
   </section>
 </template>
 
 <script>
 import SlideProducts from '~/components/home/SlideProducts'
+import { getProducts } from '~/services'
 
 export default {
   name: 'BestRatedProducts',
@@ -21,34 +22,42 @@ export default {
     SlideProducts
   },
   data: () => ({
-    products: Array.from({ length: 16 }).map((el, i) => (
-      {
-        percentage: i + 10,
-        title: 'Samsung Galaxy S20',
-        image: 'https://via.placeholder.com/150',
-        store: {
-          name: 'Americanas'
-        },
-        price: 100
-      }
-    )),
+    products: [],
     pagination: {
-      skip: 0,
+      page: 1,
       limit: 4
+    },
+    paginate: {
+      totalDocs: 0,
+      limit: 0,
+      totalPages: 0,
+      page: 0,
+      pagingCounter: 0,
+      hasPrevPage: null,
+      hasNextPage: null,
+      prevPage: null,
+      nextPage: null
     }
   }),
+  created () {
+    this.fetchProducts()
+  },
   methods: {
+    async fetchProducts () {
+      const { data: { docs, ...paginate } } = await getProducts(this.$axios, this.pagination)
+      this.products = [...this.products, ...docs]
+      this.paginate = { ...paginate }
+    },
     nextSwiper () {
-      // this.pagination = {
-      //   skip: this.pagination.skip + 4,
-      //   limit: this.pagination.limit + 4,
-      // }
-      // this.fetchMostPopularProducts()
+      this.pagination = {
+        page: this.pagination.page + 1
+      }
+      this.fetchProducts()
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '~/assets/scss/components/_best-rated-products.scss';
+  @import '~/assets/scss/components/_best-rated-products.scss';
 </style>

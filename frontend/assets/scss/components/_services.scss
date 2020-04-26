@@ -1,0 +1,29 @@
+.services {
+  background-color: #f7ffdc;
+  padding: 80px 0;
+  position: relative;
+  &::before {
+    content: "";
+    background: url('../../assets/images/sh-02.svg') no-repeat left;
+    left: -90px;
+    right: 0;
+    top: -150px;
+    height: 320px;
+    position: absolute;
+  }
+  .card {
+    padding: 50px 35px;
+    text-align: center;
+    img {
+      margin: 10px 0;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .services {
+    .card {
+      padding: 20px;
+      margin: 15px 0;
+    }
+  }
+}

@@ -5,7 +5,7 @@
       <div class="modal-body d-flex flex-direction-column align-items-center">
         <h1>{{ translateType() }}</h1>
         <form @submit.prevent="submit">
-          <div class="form-container" v-if="type === 'login'">
+          <div class="form-container" v-if="type !== 'login'">
             <input v-model="form.name" type="text" placeholder="Seu nome">
           </div>
           <div class="form-container">
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { login, createUser } from '~/services'
+
 export default {
   name: 'AuthenticationModal',
   props: {
@@ -54,15 +56,18 @@ export default {
     submit () {
       this[this.type]()
     },
-    login () {
-      const payload = this.form
-      const token = 'jhgdjagdjgad'
+    async login () {
+      const { token, data } = await login(this.$axios, this.form)
+
+      const payload = data
+
       this.$store.commit('saveUser', { payload })
       this.$store.commit('saveToken', { token })
       this.close()
     },
-    register () {
-      console.log('register', { payload: this.form })
+    async register () {
+      await createUser(this.$axios, this.form)
+      this.login()
     }
   }
 }

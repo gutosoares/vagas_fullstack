@@ -38,47 +38,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .promotional {
-    padding: 100px 0;
-    text-align: center;
-    position: relative;
-    &::before {
-      content: "";
-      background: url('../../assets/images/sh-03.svg') no-repeat right;
-      left: 0;
-      right: 0;
-      bottom: -200px;
-      height: 750px;
-      position: absolute;
-      z-index: -1;
-    }
-    .wrapper {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .video {
-      .preview {
-        position: relative;
-        img {
-          max-width: 100%;
-        }
-        &::before {
-          content: '';
-          background: url('../../assets/images/play.png') no-repeat center rgba(0,0,0,0.3);
-          position: absolute;
-          transition: all 300ms ease;
-          cursor: pointer;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-        }
-        &:hover {
-          &::before {
-            background-color: rgba(0,0,0,0.1);
-          }
-        }
-      }
-    }
-  }
+  @import '~/assets/scss/components/_promotional.scss';
 </style>

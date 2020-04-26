@@ -54,20 +54,11 @@ export default {
     ]),
     showModal (type) {
       this.$emit('show', type)
-    },
-    saveToken () {
-      const token = 'iwtuywtyuwndhajdgja'
-      const user = {
-        name: 'Augusto Soares',
-        email: 'gutosoares@outlook.com'
-      }
-      this.$store.commit('saveToken', { token })
-      this.$store.commit('saveUser', { user })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/components/_navbar.scss';
+  @import '~/assets/scss/components/_navbar.scss';
 </style>
